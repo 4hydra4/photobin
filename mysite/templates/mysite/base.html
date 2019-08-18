@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>PhotoBin</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="{% static 'css/mysite.css' %}">
+
+</head>
+<body>
+	
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<div class="container">
+			<ul class="nav navbar-nav">
+				<li><a class="navbar-brand" href="{% url 'post_list' %}">PhotoBin</a></li>
+				{% if user.is_authenticated %}
+					<li><a class="nav-link" href="{% url 'create' %}">Upload Photo</a></li>
+				{% endif %}
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				{% if user.is_authenticated %}
+					<li><span class="navbar-text font-weight-lighter text-white bg-dark">Welcome, {{ user.username }}</span></li>
+					<li><a class="nav-link" href="{% url 'logout' %}">Log out</a></li>
+				{% else %}
+					<li><a class="nav-link" href="{% url 'login' %}">Log in</a></li>
+					<li><a class="nav-link" href="{% url 'signup' %}">Sign up</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		{% block content %}
+		{% endblock %}
+	</div>
+
+</body>
+</html>

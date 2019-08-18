@@ -1,0 +1,30 @@
+{% extends "mysite/base.html" %}
+
+{% block content %}
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-md-6">
+				<ul>
+					{% for post in object_list %}
+						<div class="card border-dark bg-light mb-4">
+							<a href="{% url 'post_detail' pk=post.pk %}">
+								<img src="{{ post.photo.url }}" class="card-img-top img-fluid"  alt="{{ post.title }}">
+							</a>
+							<div class="card-body">
+								<a href="{% url 'for_user' username=post.user.username %}" class="card-link">{{ post.user.username }}</a>
+								<h4 class="card-title" style="margin-bottom: -4px;">{{ post.title }}</h4>
+								<p class="card-text">
+									<small class="text-muted">{{ post.upload_date|date:"D M Y" }}</small>
+								</p>
+								<p class="card-text">
+									<a class="btn btn-outline-dark btn-block btn-sm" href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.comments.count }}</a>
+								</p>
+							</div>
+						</div>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+{% endblock %}
