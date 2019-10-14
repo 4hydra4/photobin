@@ -12,4 +12,5 @@ urlpatterns = [
 	path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 	path('signup/', views.SignUp.as_view(), name='signup'),
 	path('by/<username>/', views.user_posts.as_view(), name='for_user'),
+	path('post/<pk>/remove/', views.post_remove, name='post_remove'),
 ]

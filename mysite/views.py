@@ -5,9 +5,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
+from django.core.exceptions import PermissionDenied
 
 from . import forms
 from . import models
+
 
 User = get_user_model()
 
@@ -73,3 +75,13 @@ def add_comment_to_post(request, pk):
 	else:
 		form = forms.CommentForm()
 	return render(request, 'mysite/comment_form.html', {'form': form})
+
+
+@login_required
+def post_remove(request, pk):
+	post = get_object_or_404(models.Post, pk=pk)
+	if request.user == post.user:
+		post.delete()
+		return redirect('for_user', username=post.user.username)
+	else:
+		raise PermissionDenied

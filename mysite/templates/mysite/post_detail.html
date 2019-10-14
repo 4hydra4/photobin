@@ -11,6 +11,9 @@
 				<div class="col-md-6">
 					<div class="card-header">
 						<h1 class="card-title display-4">{{ post.title }}</h1>
+						{% if request.user == post.user %}
+							<a class="btn btn-light" style="position:absolute; top:15px; right:15px;" href="{% url 'post_remove' pk=post.pk %}"><span class="oi oi-x" title="x" aria-hidden="true"></span></a>
+						{% endif %}
 						<h6><a href="{% url 'for_user' username=post.user.username %}">{{ post.user.username }}</a></h6>
 						<p class="card-text"><small class="text-muted">{{ post.upload_date|date:"D M Y" }}</small>
 						</p>
