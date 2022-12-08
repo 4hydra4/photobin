@@ -1,4 +1,4 @@
-certifi==2019.6.16
+certifi==2022.12.7
 Django==2.2.1
 django-braces==1.13.0
 django-crispy-forms==1.7.2
